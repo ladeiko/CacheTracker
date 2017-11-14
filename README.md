@@ -10,6 +10,27 @@ Can be used in VIPER architecture inside interactor. In this case your code will
 
 **NOTE**: Original idea was taken from [https://github.com/akantsevoi/CacheTracker](https://github.com/akantsevoi/CacheTracker)
 
+## Installation
+
+### Cocoapods
+
+To use interfaces only
+
+```ruby
+pod 'CacheTracker'
+```
+To use with CoreData
+
+```ruby
+pod 'CacheTracker/CoreData'
+```
+
+To use with Realm
+
+```ruby
+pod 'CacheTracker/Realm'
+```
+
 ## Usage
 
 Define plain model class

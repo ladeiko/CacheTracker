@@ -7,22 +7,21 @@ Pod::Spec.new do |s|
     s.author = { 'Siarhei Ladzeika' => 'sergey.ladeiko@gmail.com' }
     s.platform = :ios, '9.0'
     s.source = { :git => 'https://github.com/ladeiko/CacheTracker.git', :tag => "#{s.version}" }
-    s.source_files = 'Classes/Core/**/*.{swift}'
     s.requires_arc = true
-    s.default_subspec = 'Lite'
+    s.default_subspec = 'Core'
 
-    s.subspec 'Lite' do |s|
+    s.subspec 'Core' do |s|
         # subspec for users who don't want the CoreData/Realm
         s.source_files = 'Classes/Core/**/*.{swift}'
     end
 
     s.subspec 'CoreData' do |s|
-        s.source_files = 'Classes/CoreData/**/*.{swift}'
+        s.source_files = [ 'Classes/Core/**/*.{swift}', 'Classes/CoreData/**/*.{swift}' ]
         s.frameworks = 'CoreData'
     end
 
     s.subspec 'Realm' do |s|
-        s.source_files = 'Classes/Realm/**/*.{swift}'
+        s.source_files = [ 'Classes/Core/**/*.{swift}', 'Classes/Realm/**/*.{swift}' ]
         s.dependency 'RBQFetchedResultsControllerX'
         s.dependency 'SafeRealmObject'
     end
