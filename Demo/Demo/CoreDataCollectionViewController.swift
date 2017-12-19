@@ -24,7 +24,7 @@ class CoreDataCollectionViewController: UICollectionViewController, CacheTracker
         
         if timer == nil {
             timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
-                let value = Int.random(using: &Xoroshiro.default) % 4
+                let value = UInt.random(using: &Xoroshiro.default) % 4
                 
                 switch value {
                 case 0:
