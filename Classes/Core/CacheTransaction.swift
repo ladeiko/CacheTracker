@@ -23,7 +23,7 @@ open class CacheTransaction<P: CacheTrackerPlainModel> {
     open let newIndex: Int?
     open let type: CacheTransactionType
     
-    init(model: P?, index: Int?, newIndex: Int?, type: CacheTransactionType) {
+    public init(model: P?, index: Int?, newIndex: Int?, type: CacheTransactionType) {
         self.model = model
         self.index = index
         self.newIndex = newIndex

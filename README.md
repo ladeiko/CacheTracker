@@ -12,6 +12,9 @@ Can be used in VIPER architecture inside interactor. In this case your code will
 
 ## Changes
 
+### 1.1.1
+ * Made **init** of CacheTransaction public.
+
 ### 1.1.0
  * Add **fetchLimit** to CacheRequest (NOTE: supported only by CoreDataCacheTracker!, for Real is ignored)
 
