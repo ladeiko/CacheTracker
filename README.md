@@ -10,6 +10,11 @@ Can be used in VIPER architecture inside interactor. In this case your code will
 
 **NOTE**: Original idea was taken from [https://github.com/akantsevoi/CacheTracker](https://github.com/akantsevoi/CacheTracker)
 
+## Changes
+
+### 1.1.0
+ * Add **fetchLimit** to CacheRequest (NOTE: supported only by CoreDataCacheTracker!, for Real is ignored)
+
 ## Installation
 
 ### Cocoapods

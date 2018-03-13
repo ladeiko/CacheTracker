@@ -209,6 +209,9 @@ extension CoreDataCacheTracker {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: D.entityName())
         fetchRequest.predicate = cacheRequest.predicate
         fetchRequest.sortDescriptors = cacheRequest.sortDescriptors
+        if cacheRequest.fetchLimit > 0 {
+            fetchRequest.fetchLimit = cacheRequest.fetchLimit
+        }
         return fetchRequest
     }
     
