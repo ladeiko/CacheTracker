@@ -10,6 +10,5 @@ target 'Demo' do
   pod 'CacheTracker/CoreData', :path => './..'
   pod 'CacheTracker/Realm', :path => './..'
   pod 'MagicalRecord'
-  pod 'RandomKit', '~> 5.2'
 
 end

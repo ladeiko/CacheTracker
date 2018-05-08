@@ -10,14 +10,6 @@ Can be used in VIPER architecture inside interactor. In this case your code will
 
 **NOTE**: Original idea was taken from [https://github.com/akantsevoi/CacheTracker](https://github.com/akantsevoi/CacheTracker)
 
-## Changes
-
-### 1.1.1
- * Made **init** of CacheTransaction public.
-
-### 1.1.0
- * Add **fetchLimit** to CacheRequest (NOTE: supported only by CoreDataCacheTracker!, for Real is ignored)
-
 ## Installation
 
 ### Cocoapods
@@ -381,23 +373,21 @@ class CoreDataCollectionViewController: UICollectionViewController, CacheTracker
             return
         }
         
-        collectionView!.reloadData()
+        collectionView!.performBatchUpdates({
+            collectionView!.reloadSections(IndexSet(integer: 0))
+        }, completion: nil)
     }
     
     func cacheTrackerBeginUpdates() {
         guard isViewLoaded else {
             return
         }
-        
-        //tableView.beginUpdates()
     }
     
     func cacheTrackerEndUpdates() {
         guard isViewLoaded else {
             return
         }
-        
-        //tableView.endUpdates()
     }
     
     func cacheTrackerDidGenerate<P>(transactions: [CacheTransaction<P>]) {
@@ -730,23 +720,21 @@ class RealmCollectionViewController: UICollectionViewController, CacheTrackerDel
             return
         }
         
-        collectionView!.reloadData()
+        collectionView!.performBatchUpdates({
+            collectionView!.reloadSections(IndexSet(integer: 0))
+        }, completion: nil)
     }
     
     func cacheTrackerBeginUpdates() {
         guard isViewLoaded else {
             return
         }
-        
-        //tableView.beginUpdates()
     }
     
     func cacheTrackerEndUpdates() {
         guard isViewLoaded else {
             return
         }
-        
-        //tableView.endUpdates()
     }
     
     func cacheTrackerDidGenerate<P>(transactions: [CacheTransaction<P>]) {
@@ -780,25 +768,4 @@ class RealmCollectionViewController: UICollectionViewController, CacheTrackerDel
 ```
 
 ## LICENSE
-
-MIT License
-
-Copyright (c) 2017 Siarhei Ladzeika
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details

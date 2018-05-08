@@ -8,7 +8,6 @@
 
 import CacheTracker
 import RealmSwift
-import RandomKit
 
 class RealmTableViewController: UITableViewController, CacheTrackerDelegate {
 
@@ -21,7 +20,7 @@ class RealmTableViewController: UITableViewController, CacheTrackerDelegate {
         
         if timer == nil {
             timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
-                let value = UInt.random(using: &Xoroshiro.default) % 4
+                let value = UInt.random() % 4
                 
                 switch value {
                 
@@ -34,7 +33,7 @@ class RealmTableViewController: UITableViewController, CacheTrackerDelegate {
                             return
                         }
                         
-                        let target = abs(Int.random(using: &Xoroshiro.default)) % count
+                        let target = abs(Int.random()) % count
                         let objects = self.context.objects(RealmItem.self)
                         if target >= objects.count {
                             return
@@ -51,14 +50,14 @@ class RealmTableViewController: UITableViewController, CacheTrackerDelegate {
                             return
                         }
                         
-                        let target = abs(Int.random(using: &Xoroshiro.default)) % count
+                        let target = abs(Int.random()) % count
                         let objects = self.context.objects(RealmItem.self)
                         if target >= objects.count {
                             return
                         }
                         
                         let object = objects[target]
-                        object.name = String(abs(Int.random(using: &Xoroshiro.default)))
+                        object.name = String(abs(Int.random()))
                     }
                     
                 default:
@@ -72,8 +71,8 @@ class RealmTableViewController: UITableViewController, CacheTrackerDelegate {
                         
                         let item = RealmItem()
                         
-                        item.idKey = String(Int.random(using: &Xoroshiro.default))
-                        item.name = String(abs(Int.random(using: &Xoroshiro.default)))
+                        item.idKey = String(Int.random())
+                        item.name = String(abs(Int.random()))
                         
                         self.context.add(item)
                     }

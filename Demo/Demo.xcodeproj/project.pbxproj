@@ -20,6 +20,7 @@
 		59A406481FB636C900C5BBFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59A406461FB636C900C5BBFA /* Main.storyboard */; };
 		59A4064A1FB636C900C5BBFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59A406491FB636C900C5BBFA /* Assets.xcassets */; };
 		59A4064D1FB636C900C5BBFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59A4064B1FB636C900C5BBFA /* LaunchScreen.storyboard */; };
+		8483E7EF20A2310500DA9D3E /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8483E7EE20A2310500DA9D3E /* Random.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		59A4064C1FB636C900C5BBFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		59A4064E1FB636C900C5BBFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70D5E268FEC2BA932037E9B4 /* Pods-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.release.xcconfig"; sourceTree = "<group>"; };
+		8483E7EE20A2310500DA9D3E /* Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		D4FD90E2514B9503BE8D198F /* Pods_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				59A406421FB636C900C5BBFA /* AppDelegate.swift */,
+				8483E7EE20A2310500DA9D3E /* Random.swift */,
 				59A406441FB636C900C5BBFA /* CoreDataTableViewController.swift */,
 				12A81D541FBADCEC0058C64D /* CoreDataCollectionViewController.swift */,
 				12F6F2931FB9D5BE001AFE1E /* RealmTableViewController.swift */,
@@ -191,13 +194,10 @@
 				"${BUILT_PRODUCTS_DIR}/MagicalRecord/MagicalRecord.framework",
 				"${BUILT_PRODUCTS_DIR}/RBQFetchedResultsControllerX/RBQFetchedResultsControllerX.framework",
 				"${BUILT_PRODUCTS_DIR}/RBQSafeRealmObject/RBQSafeRealmObject.framework",
-				"${BUILT_PRODUCTS_DIR}/RandomKit/RandomKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmUtilities/RealmUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/SafeRealmObject/SafeRealmObject.framework",
-				"${BUILT_PRODUCTS_DIR}/ShiftOperations/ShiftOperations.framework",
-				"${BUILT_PRODUCTS_DIR}/Threadly/Threadly.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -205,13 +205,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RBQFetchedResultsControllerX.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RBQSafeRealmObject.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RandomKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SafeRealmObject.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ShiftOperations.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Threadly.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -260,6 +257,7 @@
 			files = (
 				59A406451FB636C900C5BBFA /* CoreDataTableViewController.swift in Sources */,
 				12F6F2961FB9D61D001AFE1E /* RealmItem.swift in Sources */,
+				8483E7EF20A2310500DA9D3E /* Random.swift in Sources */,
 				59A406431FB636C900C5BBFA /* AppDelegate.swift in Sources */,
 				12F6F2921FB96B39001AFE1E /* PlainItem.swift in Sources */,
 				12A81D571FBAE0E70058C64D /* RealmCollectionViewController.swift in Sources */,

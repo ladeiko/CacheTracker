@@ -180,6 +180,12 @@ open class CoreDataCacheTracker<D: CacheTrackerDatabaseModel, P: CacheTrackerPla
         defer {
             _transactions = nil
             delegate?.cacheTrackerEndUpdates()
+            
+            // HACK, try create more elegant solution in future
+            if _cacheRequest.fetchLimit > 0, let fetchedObjects = _controller.fetchedObjects, fetchedObjects.count > _cacheRequest.fetchLimit {
+                try! _controller.performFetch()
+                delegate?.cacheTrackerShouldMakeInitialReload()
+            }
         }
         
         guard _transactions.isEmpty == false else { //fix iOS8/9 bug: count maybe 0
