@@ -11,7 +11,11 @@ public protocol CacheTracker: class {
     
     associatedtype P: CacheTrackerPlainModel
     
+#if swift(>=4.1)
+    var delegate: CacheTrackerDelegate? { get set }
+#else
     weak var delegate: CacheTrackerDelegate? { get set }
+#endif
     
     /**
          Starts fetching of objects associated with passed cache request.
