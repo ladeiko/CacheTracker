@@ -9,7 +9,7 @@
 import Foundation
 import CacheTracker
 
-class PlainItem: CacheTrackerPlainModel {
+class PlainItem: NSObject, CacheTrackerPlainModel {
     
     let name: String
     
@@ -19,8 +19,9 @@ class PlainItem: CacheTrackerPlainModel {
     
     // MARK: - CacheTrackerPlainModel
     
-    required init() {
+    required override init() {
         self.name = ""
+        super.init()
     }
 
 }

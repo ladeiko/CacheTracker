@@ -8,6 +8,7 @@
 
 import UIKit
 import MagicalRecord
+import CacheTracker
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate { 
@@ -17,6 +18,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         MagicalRecord.setLoggingLevel(.off)
         MagicalRecord.setupCoreDataStack(withStoreNamed: "Model")
+
+        let array = ArrayCacheTracker<PlainItem>(data: [
+            PlainItem(name: "B"),
+            PlainItem(name: "A")
+            ])
+
+        array.fetchWithRequest(CacheRequest(predicate: NSPredicate.init(block: { (obj, bindings) -> Bool in
+            let obj = obj as! PlainItem
+            return obj.name == "A"
+        }), sortDescriptors: [NSSortDescriptor.init(key: #keyPath(PlainItem.name), ascending: true)]))
+        
+        for i in array.allObjects() {
+            print(i.name)
+        }
+        
         return true
     }
 

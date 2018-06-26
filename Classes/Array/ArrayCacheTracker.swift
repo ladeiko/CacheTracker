@@ -7,19 +7,15 @@
 
 import Foundation
 
-open class ArrayCacheTracker<P: CacheTrackerPlainModel>: CacheTracker {
+open class ArrayCacheTracker<P: NSObjectProtocol & CacheTrackerPlainModel>: CacheTracker {
 
-    public typealias ArrayCacheTrackerFilter = (_ request: CacheRequest, _ item: P) -> Bool
-    
     fileprivate var _cacheRequest: CacheRequest!
     fileprivate var _transactions: [CacheTransaction<P>]!
-    fileprivate let _filter: ArrayCacheTrackerFilter
     fileprivate var _initialData: [P]
     fileprivate var _data: [P]!
     
-    public init(data: [P], filter: @escaping ArrayCacheTrackerFilter) {
+    public init(data: [P]) {
         self._initialData = data.map({ $0 })
-        self._filter = filter
     }
     
     // MARK: - CacheTracker
@@ -28,9 +24,9 @@ open class ArrayCacheTracker<P: CacheTrackerPlainModel>: CacheTracker {
     
     open func fetchWithRequest(_ cacheRequest: CacheRequest, cacheName: String? = nil) -> Void {
         _cacheRequest = cacheRequest
-        _data = _initialData.filter({ (model) -> Bool in
-            return _filter(_cacheRequest, model)
-        })
+        let filtered = (_initialData as NSArray).filtered(using: _cacheRequest.predicate)
+        let sorted = (filtered as NSArray).sortedArray(using: _cacheRequest.sortDescriptors)
+        _data = sorted as! [P]
         if _cacheRequest.fetchLimit > 0 {
             _data = [P](_data[0..<_cacheRequest.fetchLimit])
         }
