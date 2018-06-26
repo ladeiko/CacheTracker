@@ -9,6 +9,7 @@ target 'Demo' do
   # Pods for Demo
   pod 'CacheTracker/CoreData', :path => './..'
   pod 'CacheTracker/Realm', :path => './..'
+  pod 'CacheTracker/Array', :path => './..'
   pod 'MagicalRecord'
 
 end

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name = 'CacheTracker'
-    s.version = '1.1.3'
+    s.version = '1.2.1'
     s.summary = 'Helper to divide UI from Database layer. Based on https://github.com/akantsevoi/CacheTracker'
     s.homepage = 'https://github.com/ladeiko/CacheTracker'
     s.license = { :type => 'CUSTOM', :file => 'LICENSE' }
@@ -24,6 +24,10 @@ Pod::Spec.new do |s|
         s.source_files = [ 'Classes/Core/**/*.{swift}', 'Classes/Realm/**/*.{swift}' ]
         s.dependency 'RBQFetchedResultsControllerX'
         s.dependency 'SafeRealmObject'
+    end
+
+    s.subspec 'Array' do |s|
+        s.source_files = [ 'Classes/Core/**/*.{swift}', 'Classes/Array/**/*.{swift}' ]
     end
 
 end
