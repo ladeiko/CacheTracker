@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name = 'CacheTracker'
-    s.version = '1.2.1'
+    s.version = '1.3.1'
     s.summary = 'Helper to divide UI from Database layer. Based on https://github.com/akantsevoi/CacheTracker'
     s.homepage = 'https://github.com/ladeiko/CacheTracker'
     s.license = { :type => 'CUSTOM', :file => 'LICENSE' }

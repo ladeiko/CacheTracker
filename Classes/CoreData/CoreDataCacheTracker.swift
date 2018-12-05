@@ -22,6 +22,8 @@ open class CoreDataCacheTracker<D: CacheTrackerDatabaseModel, P: CacheTrackerPla
     
     // MARK: - CacheTracker
     
+    open var fetchLimitThreshold: Int = 0
+    
     open weak var delegate: CacheTrackerDelegate?
     
     open func fetchWithRequest(_ cacheRequest: CacheRequest, cacheName: String? = nil) -> Void {
@@ -182,7 +184,7 @@ open class CoreDataCacheTracker<D: CacheTrackerDatabaseModel, P: CacheTrackerPla
             delegate?.cacheTrackerEndUpdates()
             
             // HACK, try create more elegant solution in future
-            if _cacheRequest.fetchLimit > 0, let fetchedObjects = _controller.fetchedObjects, fetchedObjects.count > _cacheRequest.fetchLimit {
+            if _cacheRequest.fetchLimit > 0, let fetchedObjects = _controller.fetchedObjects, fetchedObjects.count > (_cacheRequest.fetchLimit + fetchLimitThreshold) {
                 try! _controller.performFetch()
                 delegate?.cacheTrackerShouldMakeInitialReload()
             }

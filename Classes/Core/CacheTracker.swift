@@ -73,4 +73,11 @@ public protocol CacheTracker: class {
          @return NSArray of model objects
      */
     func allObjects() -> [P]
+    
+    /**
+        Defaults to 0
+        Value controls situation when controller fetched more objects
+        than required by fetchLimit in request.
+    */
+    var fetchLimitThreshold: Int { set get }
 }

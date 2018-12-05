@@ -26,6 +26,8 @@ open class RealmCacheTracker<D: Object & CacheTrackerDatabaseModel, P: CacheTrac
 
     // MARK: - CacheTracker
     
+    open var fetchLimitThreshold: Int = 0
+    
     open func fetchWithRequest(_ cacheRequest: CacheRequest, cacheName: String? = nil) -> Void {
         _cacheRequest = cacheRequest
         let fetchRequest = self._fetchRequestWithCacheRequest(cacheRequest)

@@ -11,6 +11,7 @@ import CacheTracker
 
 class PlainItem: NSObject, CacheTrackerPlainModel {
     
+    @objc
     let name: String
     
     init(name: String) {

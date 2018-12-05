@@ -8,6 +8,8 @@
 import Foundation
 
 open class ArrayCacheTracker<P: NSObjectProtocol & CacheTrackerPlainModel>: CacheTracker {
+    
+    open var fetchLimitThreshold: Int = 0
 
     fileprivate var _cacheRequest: CacheRequest!
     fileprivate var _transactions: [CacheTransaction<P>]!
