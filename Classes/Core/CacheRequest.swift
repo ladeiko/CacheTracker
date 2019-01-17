@@ -11,9 +11,9 @@ import Foundation
 
 open class CacheRequest {
     
-    open let predicate: NSPredicate
-    open let sortDescriptors: [NSSortDescriptor]
-    open let fetchLimit: Int
+    public let predicate: NSPredicate
+    public let sortDescriptors: [NSSortDescriptor]
+    public let fetchLimit: Int
     
     public init(predicate: NSPredicate, sortDescriptors: [NSSortDescriptor], fetchLimit: Int = 0) {
         assert(!sortDescriptors.isEmpty)

@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import HeckelDiff
 
 open class CoreDataCacheTracker<D: CacheTrackerDatabaseModel, P: CacheTrackerPlainModel>: NSObject, CacheTracker, NSFetchedResultsControllerDelegate {
 
@@ -23,6 +24,8 @@ open class CoreDataCacheTracker<D: CacheTrackerDatabaseModel, P: CacheTrackerPla
     // MARK: - CacheTracker
     
     open var fetchLimitThreshold: Int = 0
+    
+    open var enableFetchLimitOverflowSoftNormalizer: Bool = false
     
     open weak var delegate: CacheTrackerDelegate?
     
@@ -185,8 +188,60 @@ open class CoreDataCacheTracker<D: CacheTrackerDatabaseModel, P: CacheTrackerPla
             
             // HACK, try create more elegant solution in future
             if _cacheRequest.fetchLimit > 0, let fetchedObjects = _controller.fetchedObjects, fetchedObjects.count > (_cacheRequest.fetchLimit + fetchLimitThreshold) {
+                
                 try! _controller.performFetch()
-                delegate?.cacheTrackerShouldMakeInitialReload()
+                
+                if enableFetchLimitOverflowSoftNormalizer {
+                    
+                    let oldObjects = fetchedObjects as! [NSManagedObject]
+                    let newObjects = _controller.fetchedObjects as! [NSManagedObject]
+
+                    let oldItems = oldObjects.map { (o) -> String in
+                        return o.objectID.uriRepresentation().absoluteString
+                    }
+                    
+                    let newItems = newObjects.map { (o) -> String in
+                        return o.objectID.uriRepresentation().absoluteString
+                    }
+                    
+                    var diffTransactions = [CacheTransaction<P>]()
+                    
+                    let result = diff(oldItems, newItems)
+                    
+                    result.forEach { (operation) in
+                        switch operation {
+                        
+                        case .update(let index):
+                            let anObject = newObjects[index] as! D
+                            let model: P = anObject.toPlainModel()!
+                            let transaction = CacheTransaction<P>(model: model, index: index, newIndex: nil, type: .update)
+                            diffTransactions.append(transaction)
+                            
+                        case .delete(let index):
+                            let transaction = CacheTransaction<P>(model: nil, index: index, newIndex: nil, type: .delete)
+                            diffTransactions.append(transaction)
+                            
+                        case .insert(let index):
+                            let anObject = newObjects[index] as! D
+                            let model: P = anObject.toPlainModel()!
+                            let transaction = CacheTransaction<P>(model: model, index: nil, newIndex: index, type: .insert)
+                            diffTransactions.append(transaction)
+                            
+                        case .move(let from, let to):
+                            let anObject = oldObjects[from] as! D
+                            let model: P = anObject.toPlainModel()!
+                            let transaction = CacheTransaction<P>(model: model, index: from, newIndex: to, type:.move)
+                            diffTransactions.append(transaction)
+                        }
+                    }
+                    
+                    delegate?.cacheTrackerBeginUpdates()
+                    delegate?.cacheTrackerDidGenerate(transactions: diffTransactions)
+                    delegate?.cacheTrackerEndUpdates()
+                }
+                else {
+                    delegate?.cacheTrackerShouldMakeInitialReload()
+                }
             }
         }
         

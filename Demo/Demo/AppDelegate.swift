@@ -14,16 +14,16 @@ import CacheTracker
 class AppDelegate: UIResponder, UIApplicationDelegate { 
 
     var window: UIWindow?
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    
+    func setup() {
         MagicalRecord.setLoggingLevel(.off)
         MagicalRecord.setupCoreDataStack(withStoreNamed: "Model")
-
+        
         let array = ArrayCacheTracker<PlainItem>(data: [
             PlainItem(name: "B"),
             PlainItem(name: "A")
             ])
-
+        
         array.fetchWithRequest(CacheRequest(predicate: NSPredicate.init(block: { (obj, bindings) -> Bool in
             let obj = obj as! PlainItem
             return obj.name == "A"
@@ -32,9 +32,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for i in array.allObjects() {
             print(i.name)
         }
-        
+    }
+    
+#if swift(>=4.2)
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        setup()
         return true
     }
+#else
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        setup()
+        return true
+    }
+#endif
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

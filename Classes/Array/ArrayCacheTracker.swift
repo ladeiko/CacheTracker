@@ -28,7 +28,7 @@ open class ArrayCacheTracker<P: NSObjectProtocol & CacheTrackerPlainModel>: Cach
         _cacheRequest = cacheRequest
         let filtered = (_initialData as NSArray).filtered(using: _cacheRequest.predicate)
         let sorted = (filtered as NSArray).sortedArray(using: _cacheRequest.sortDescriptors)
-        _data = sorted as! [P]
+        _data = (sorted as! [P])
         if _cacheRequest.fetchLimit > 0 {
             _data = [P](_data[0..<_cacheRequest.fetchLimit])
         }

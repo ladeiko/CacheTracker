@@ -18,10 +18,10 @@ public enum CacheTransactionType : UInt {
 
 open class CacheTransaction<P: CacheTrackerPlainModel> {
     
-    open let model: P?
-    open let index: Int?
-    open let newIndex: Int?
-    open let type: CacheTransactionType
+    public let model: P?
+    public let index: Int?
+    public let newIndex: Int?
+    public let type: CacheTransactionType
     
     public init(model: P?, index: Int?, newIndex: Int?, type: CacheTransactionType) {
         self.model = model
