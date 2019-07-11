@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		12A81D551FBADCED0058C64D /* CoreDataCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A81D541FBADCEC0058C64D /* CoreDataCollectionViewController.swift */; };
 		12A81D571FBAE0E70058C64D /* RealmCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A81D561FBAE0E70058C64D /* RealmCollectionViewController.swift */; };
+		12AE6F9622D72CB400FAB68C /* MultiCacheTrackerExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE6F9522D72CB400FAB68C /* MultiCacheTrackerExample.swift */; };
 		12F6F28E1FB969DB001AFE1E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12F6F28C1FB969DB001AFE1E /* Model.xcdatamodeld */; };
 		12F6F2901FB96A08001AFE1E /* CoreDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F6F28F1FB96A08001AFE1E /* CoreDataItem.swift */; };
 		12F6F2921FB96B39001AFE1E /* PlainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F6F2911FB96B39001AFE1E /* PlainItem.swift */; };
@@ -25,11 +26,12 @@
 
 /* Begin PBXFileReference section */
 		0079AF1AF0DE187185F9706F /* Pods-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.debug.xcconfig"; sourceTree = "<group>"; };
-		123AE0F421F0B459000A1683 /* CacheTracker.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = CacheTracker.podspec; path = ../CacheTracker.podspec; sourceTree = "<group>"; };
+		123AE0F421F0B459000A1683 /* CacheTracker.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = CacheTracker.podspec; path = ../CacheTracker.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		123AE0F521F0B7BB000A1683 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		123AE0F621F0B7BB000A1683 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
 		12A81D541FBADCEC0058C64D /* CoreDataCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataCollectionViewController.swift; sourceTree = "<group>"; };
 		12A81D561FBAE0E70058C64D /* RealmCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCollectionViewController.swift; sourceTree = "<group>"; };
+		12AE6F9522D72CB400FAB68C /* MultiCacheTrackerExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiCacheTrackerExample.swift; sourceTree = "<group>"; };
 		12F6F28D1FB969DB001AFE1E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		12F6F28F1FB96A08001AFE1E /* CoreDataItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataItem.swift; sourceTree = "<group>"; };
 		12F6F2911FB96B39001AFE1E /* PlainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainItem.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			children = (
 				59A406421FB636C900C5BBFA /* AppDelegate.swift */,
 				8483E7EE20A2310500DA9D3E /* Random.swift */,
+				12AE6F9522D72CB400FAB68C /* MultiCacheTrackerExample.swift */,
 				59A406441FB636C900C5BBFA /* CoreDataTableViewController.swift */,
 				12A81D541FBADCEC0058C64D /* CoreDataCollectionViewController.swift */,
 				12F6F2931FB9D5BE001AFE1E /* RealmTableViewController.swift */,
@@ -273,6 +276,7 @@
 				12F6F28E1FB969DB001AFE1E /* Model.xcdatamodeld in Sources */,
 				12F6F2901FB96A08001AFE1E /* CoreDataItem.swift in Sources */,
 				12F6F2941FB9D5BE001AFE1E /* RealmTableViewController.swift in Sources */,
+				12AE6F9622D72CB400FAB68C /* MultiCacheTrackerExample.swift in Sources */,
 				12A81D551FBADCED0058C64D /* CoreDataCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

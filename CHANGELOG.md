@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## 1.4.1
+### Added 
+* CacheTrackerDelegateProxy, CacheTrackerDelegateProxyDelegate. See usage example in [MultiCacheTrackerExample.swift](Demo/Demo/MultiCacheTrackerExample.swift)
+
 ## 1.3.2
 ### Added
 * enableFetchLimitOverflowSoftNormalizer (default is false) to CoreDataCacheTracker
