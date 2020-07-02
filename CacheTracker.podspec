@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
     s.source = { :git => 'https://github.com/ladeiko/CacheTracker.git', :tag => "#{s.version}" }
     s.requires_arc = true
     s.default_subspec = 'Core'
-    s.swift_versions = '4.0', '4.2', '5.0'
+    s.swift_versions = '4.0', '4.2', '5.0', '5.1', '5.2'
 
     s.subspec 'Core' do |s|
         # subspec for users who don't want the CoreData/Realm
