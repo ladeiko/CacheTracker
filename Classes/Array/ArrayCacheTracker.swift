@@ -7,7 +7,12 @@
 
 import Foundation
 
-open class ArrayCacheTracker<P: NSObjectProtocol & CacheTrackerPlainModel>: CacheTracker {
+public protocol ArrayCacheTrackerElement {
+    func evaluate(_ predicate: NSPredicate) -> Bool
+    static func sort(_ descriptors: [NSSortDescriptor], lhs: Self, rhs: Self) -> Bool
+}
+
+open class ArrayCacheTracker<P: ArrayCacheTrackerElement & CacheTrackerPlainModel>: CacheTracker {
     
     open var fetchLimitThreshold: Int = 0
 
@@ -26,9 +31,10 @@ open class ArrayCacheTracker<P: NSObjectProtocol & CacheTrackerPlainModel>: Cach
     
     open func fetchWithRequest(_ cacheRequest: CacheRequest, cacheName: String? = nil) -> Void {
         _cacheRequest = cacheRequest
-        let filtered = (_initialData as NSArray).filtered(using: _cacheRequest.predicate)
-        let sorted = (filtered as NSArray).sortedArray(using: _cacheRequest.sortDescriptors)
-        _data = (sorted as! [P])
+        let filtered = _initialData.filter({ $0.evaluate(_cacheRequest.predicate) })//  (_initialData as NSArray).filtered(using: _cacheRequest.predicate)
+        _data = filtered.sorted(by: { (a, b) -> Bool in
+            return P.sort(_cacheRequest.sortDescriptors, lhs: a, rhs: b)
+        })
         if _cacheRequest.fetchLimit > 0 {
             _data = [P](_data[0..<_cacheRequest.fetchLimit])
         }

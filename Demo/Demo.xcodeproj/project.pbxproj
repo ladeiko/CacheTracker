@@ -133,7 +133,6 @@
 				59A4063C1FB636C900C5BBFA /* Frameworks */,
 				59A4063D1FB636C900C5BBFA /* Resources */,
 				3DDD14B47950EB3EF557229D /* [CP] Embed Pods Frameworks */,
-				7AF9241FF7AAFC3B7D821B24 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -199,7 +198,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Demo/Pods-Demo-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Demo/Pods-Demo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CacheTracker/CacheTracker.framework",
 				"${BUILT_PRODUCTS_DIR}/HeckelDiff/HeckelDiff.framework",
 				"${BUILT_PRODUCTS_DIR}/MagicalRecord/MagicalRecord.framework",
@@ -224,22 +223,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Demo/Pods-Demo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7AF9241FF7AAFC3B7D821B24 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Demo/Pods-Demo-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Demo/Pods-Demo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9F4F82B29910F01253A0AB6B /* [CP] Check Pods Manifest.lock */ = {

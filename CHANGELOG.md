@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## 1.5.0
+### Changed
+* Removed 'init' from CacheTrackerPlainModel
+* ArrayCacheTracker (removed NSObjectProtocol conformance for element), ArrayCacheTrackerElement added
+
 ## 1.4.1
 ### Added 
 * CacheTrackerDelegateProxy, CacheTrackerDelegateProxyDelegate. See usage example in [MultiCacheTrackerExample.swift](Demo/Demo/MultiCacheTrackerExample.swift)

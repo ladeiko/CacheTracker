@@ -9,6 +9,4 @@
 
 import Foundation
 
-public protocol CacheTrackerPlainModel: class {
-    init()
-}
+public protocol CacheTrackerPlainModel: class {}
