@@ -6,7 +6,7 @@
 //
 
 import RBQSafeRealmObject
-import SafeRealmObject
+import SafeRealmObjectX
 import Realm
 import RealmSwift
 import RBQFetchedResultsControllerX

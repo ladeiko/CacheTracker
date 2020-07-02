@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
     s.subspec 'Realm' do |s|
         s.source_files = [ 'Classes/Core/**/*.{swift}', 'Classes/Realm/**/*.{swift}' ]
         s.dependency 'RBQFetchedResultsControllerX'
-        s.dependency 'SafeRealmObject'
+        s.dependency 'SafeRealmObjectX'
     end
 
     s.subspec 'Array' do |s|

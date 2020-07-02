@@ -7,7 +7,7 @@
 
 import Foundation
 import RealmSwift
-import SafeRealmObject
+import SafeRealmObjectX
 import RBQFetchedResultsControllerX
 
 open class RealmCacheTracker<D: Object & CacheTrackerDatabaseModel, P: CacheTrackerPlainModel>: NSObject, CacheTracker, RealmFetchedResultsControllerDelegate {

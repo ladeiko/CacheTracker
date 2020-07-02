@@ -265,6 +265,10 @@ extension CoreDataCacheTracker {
         case .update: return .update
         case .delete: return .delete
         case .move: return .move
+        #if swift(>=5.0)
+        @unknown default:
+            fatalError()
+        #endif
         }
     }
     
