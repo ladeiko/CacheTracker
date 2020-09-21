@@ -16,14 +16,12 @@ open class CacheRequest {
     public let fetchLimit: Int
     
     public init(predicate: NSPredicate, sortDescriptors: [NSSortDescriptor], fetchLimit: Int = 0) {
-        assert(!sortDescriptors.isEmpty)
         self.predicate = predicate
         self.sortDescriptors = sortDescriptors
         self.fetchLimit = fetchLimit
     }
 
     public init(sortDescriptors: [NSSortDescriptor], fetchLimit: Int = 0) {
-        assert(!sortDescriptors.isEmpty)
         self.predicate = NSPredicate(value: true)
         self.sortDescriptors = sortDescriptors
         self.fetchLimit = fetchLimit
