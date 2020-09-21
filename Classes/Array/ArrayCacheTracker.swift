@@ -32,7 +32,7 @@ open class ArrayCacheTracker<P: ArrayCacheTrackerElement & CacheTrackerPlainMode
     open func fetchWithRequest(_ cacheRequest: CacheRequest, cacheName: String? = nil) -> Void {
         _cacheRequest = cacheRequest
         let filtered = _initialData.filter({ $0.evaluate(_cacheRequest.predicate) })//  (_initialData as NSArray).filtered(using: _cacheRequest.predicate)
-        _data = filtered.sorted(by: { (a, b) -> Bool in
+        _data = _cacheRequest.sortDescriptors.isEmpty ? filtered : filtered.sorted(by: { (a, b) -> Bool in
             return P.sort(_cacheRequest.sortDescriptors, lhs: a, rhs: b)
         })
         if _cacheRequest.fetchLimit > 0 {
