@@ -23,15 +23,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             PlainItem(name: "B"),
             PlainItem(name: "A")
             ])
-        
-        array.fetchWithRequest(CacheRequest(predicate: NSPredicate.init(block: { (obj, bindings) -> Bool in
-            let obj = obj as! PlainItem
-            return obj.name == "A"
-        }), sortDescriptors: [NSSortDescriptor.init(key: #keyPath(PlainItem.name), ascending: true)]))
-        
-        for i in array.allObjects() {
-            print(i.name)
-        }
+
+        array.fetchWithRequest(CacheRequest.arrayRequest(filter: ArrayCacheRequestFilter<PlainItem> { $0.name == "A" },
+                                                         comparator: ArrayCacheRequestComparator<PlainItem> { $0.name < $1.name }))
+        print(array.allObjects())
+
+        array.fetchWithRequest(CacheRequest.arrayRequest(comparator: ArrayCacheRequestComparator<PlainItem> { $0.name < $1.name }))
+        print(array.allObjects())
+
+        array.fetchWithRequest(CacheRequest.arrayRequest(comparator: ArrayCacheRequestComparator<PlainItem> { $0.name > $1.name }))
+        print(array.allObjects())
     }
     
 #if swift(>=4.2)

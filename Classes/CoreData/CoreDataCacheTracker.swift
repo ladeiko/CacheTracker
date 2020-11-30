@@ -12,7 +12,7 @@ import HeckelDiff
 open class CoreDataCacheTracker<D: CacheTrackerDatabaseModel, P: CacheTrackerPlainModel>: NSObject, CacheTracker, NSFetchedResultsControllerDelegate {
 
     fileprivate var _controller: NSFetchedResultsController<NSFetchRequestResult>!
-    fileprivate var _cacheRequest: CacheRequest!
+    fileprivate var _cacheRequest: DatabaseCacheRequest!
     fileprivate var _context: NSManagedObjectContext!
     fileprivate var _transactions: [CacheTransaction<P>]!
 
@@ -30,8 +30,20 @@ open class CoreDataCacheTracker<D: CacheTrackerDatabaseModel, P: CacheTrackerPla
     open weak var delegate: CacheTrackerDelegate?
     
     open func fetchWithRequest(_ cacheRequest: CacheRequest, cacheName: String? = nil) -> Void {
-        _cacheRequest = cacheRequest
-        let fetchRequest = self._fetchRequestWithCacheRequest(cacheRequest)
+
+        if let cacheRequest = cacheRequest as? DatabaseCacheRequest {
+            _cacheRequest = cacheRequest
+        }
+        else {
+            #if DEBUG
+            print("Please create request with CacheRequest.databaseRequest(...)")
+            #endif
+            _cacheRequest = DatabaseCacheRequest(predicate: cacheRequest.predicate,
+                                                 sortDescriptors: cacheRequest.sortDescriptors,
+                                                 fetchLimit: cacheRequest.fetchLimit)
+        }
+
+        let fetchRequest = self._fetchRequestWithCacheRequest(_cacheRequest)
         _controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                  managedObjectContext: _context,
                                                  sectionNameKeyPath: nil,
@@ -273,6 +285,9 @@ extension CoreDataCacheTracker {
     }
     
     fileprivate func _fetchRequestWithCacheRequest(_ cacheRequest: CacheRequest) -> NSFetchRequest<NSFetchRequestResult> {
+        guard let cacheRequest = cacheRequest as? DatabaseCacheRequest else {
+            fatalError()
+        }
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: D.entityName())
         fetchRequest.predicate = cacheRequest.predicate
         fetchRequest.sortDescriptors = cacheRequest.sortDescriptors

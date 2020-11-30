@@ -77,3 +77,9 @@ public protocol CacheTracker: class {
     */
     var fetchLimitThreshold: Int { set get }
 }
+
+public extension CacheTracker {
+    func fetchWithRequest(_ cacheRequest: CacheRequest) {
+        fetchWithRequest(cacheRequest, cacheName: nil)
+    }
+}

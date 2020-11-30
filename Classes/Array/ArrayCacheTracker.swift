@@ -7,16 +7,11 @@
 
 import Foundation
 
-public protocol ArrayCacheTrackerElement {
-    func evaluate(_ predicate: NSPredicate) -> Bool
-    static func sort(_ descriptors: [NSSortDescriptor], lhs: Self, rhs: Self) -> Bool
-}
+open class ArrayCacheTracker<P: CacheTrackerPlainModel>: CacheTracker {
 
-open class ArrayCacheTracker<P: ArrayCacheTrackerElement & CacheTrackerPlainModel>: CacheTracker {
-    
     open var fetchLimitThreshold: Int = 0
 
-    fileprivate var _cacheRequest: CacheRequest!
+    fileprivate var _cacheRequest: ArrayCacheRequest<P>!
     fileprivate var _transactions: [CacheTransaction<P>]!
     fileprivate var _initialData: [P]
     fileprivate var _data: [P]!
@@ -29,15 +24,27 @@ open class ArrayCacheTracker<P: ArrayCacheTrackerElement & CacheTrackerPlainMode
     
     open weak var delegate: CacheTrackerDelegate?
     
-    open func fetchWithRequest(_ cacheRequest: CacheRequest, cacheName: String? = nil) -> Void {
-        _cacheRequest = cacheRequest
-        let filtered = _initialData.filter({ $0.evaluate(_cacheRequest.predicate) })//  (_initialData as NSArray).filtered(using: _cacheRequest.predicate)
-        _data = _cacheRequest.sortDescriptors.isEmpty ? filtered : filtered.sorted(by: { (a, b) -> Bool in
-            return P.sort(_cacheRequest.sortDescriptors, lhs: a, rhs: b)
-        })
-        if _cacheRequest.fetchLimit > 0 {
-            _data = [P](_data[0..<_cacheRequest.fetchLimit])
+    open func fetchWithRequest(_ cacheRequest: CacheRequest, cacheName: String?) -> Void {
+
+        guard let cacheRequest = cacheRequest as? ArrayCacheRequest<P> else {
+            fatalError()
         }
+
+        _cacheRequest = cacheRequest
+        _data = _initialData
+
+        if let matches = _cacheRequest.filter?.matches {
+            _data = _data.filter(matches)
+        }
+
+        if let compare = _cacheRequest.comparator?.compare {
+            _data = _data.sorted(by: compare)
+        }
+
+        if let range = _cacheRequest.range {
+            _data = Array(_data[range])
+        }
+
         delegate?.cacheTrackerShouldMakeInitialReload()
     }
     
@@ -47,10 +54,6 @@ open class ArrayCacheTracker<P: ArrayCacheTrackerElement & CacheTrackerPlainMode
     
     open func deleteCache(withName name: String?) {
         
-    }
-    
-    open func fetchWithRequest(_ cacheRequest: CacheRequest) -> Void {
-        fetchWithRequest(cacheRequest, cacheName: nil)
     }
     
     open func object(at index: Int) -> P? {

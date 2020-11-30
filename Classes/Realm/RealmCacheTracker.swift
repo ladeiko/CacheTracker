@@ -29,8 +29,20 @@ open class RealmCacheTracker<D: Object & CacheTrackerDatabaseModel, P: CacheTrac
     open var fetchLimitThreshold: Int = 0
     
     open func fetchWithRequest(_ cacheRequest: CacheRequest, cacheName: String? = nil) -> Void {
-        _cacheRequest = cacheRequest
-        let fetchRequest = self._fetchRequestWithCacheRequest(cacheRequest)
+
+        if let cacheRequest = cacheRequest as? DatabaseCacheRequest {
+            _cacheRequest = cacheRequest
+        }
+        else {
+            #if DEBUG
+            print("Please create request with CacheRequest.databaseRequest(...)")
+            #endif
+            _cacheRequest = DatabaseCacheRequest(predicate: cacheRequest.predicate,
+                                                 sortDescriptors: cacheRequest.sortDescriptors,
+                                                 fetchLimit: cacheRequest.fetchLimit)
+        }
+
+        let fetchRequest = self._fetchRequestWithCacheRequest()
         _controller = RealmFetchedResultsController(fetchRequest: fetchRequest,
                                                  sectionNameKeyPath: nil,
                                                  cacheName: cacheName)
@@ -167,12 +179,11 @@ open class RealmCacheTracker<D: Object & CacheTrackerDatabaseModel, P: CacheTrac
         }
     }
     
-    fileprivate func _fetchRequestWithCacheRequest(_ cacheRequest: CacheRequest) -> CacheTrackerRealmFetchRequest<D> {
-        let fetchRequest = CacheTrackerRealmFetchRequest<D>(realm: _realm, predicate: cacheRequest.predicate)
-        fetchRequest.sortDescriptors = cacheRequest.sortDescriptors.map({ (sd) -> SortDescriptor in
+    fileprivate func _fetchRequestWithCacheRequest() -> CacheTrackerRealmFetchRequest<D> {
+        let fetchRequest = CacheTrackerRealmFetchRequest<D>(realm: _realm, predicate: _cacheRequest.predicate)
+        fetchRequest.sortDescriptors = _cacheRequest.sortDescriptors.map({ (sd) -> SortDescriptor in
             return SortDescriptor(keyPath: sd.key!, ascending: sd.ascending)
         })
         return fetchRequest
     }
-    
 }

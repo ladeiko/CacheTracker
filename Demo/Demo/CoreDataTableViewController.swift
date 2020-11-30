@@ -81,7 +81,7 @@ class CoreDataTableViewController: UITableViewController, CacheTrackerDelegate {
         
         cacheTracker = CoreDataCacheTracker<CoreDataItem, PlainItem>(context: NSManagedObjectContext.mr_default())
         cacheTracker.delegate = self
-        let cacheRequest = CacheRequest(predicate: NSPredicate(value: true), sortDescriptors: [
+        let cacheRequest = CacheRequest.databaseRequest(predicate: NSPredicate(value: true), sortDescriptors: [
             NSSortDescriptor(key: #keyPath(CoreDataItem.name), ascending: true)
             ], fetchLimit: 5)
         cacheTracker.fetchWithRequest(cacheRequest)

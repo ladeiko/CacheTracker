@@ -17,17 +17,10 @@ class PlainItem: NSObject, CacheTrackerPlainModel {
     init(name: String) {
         self.name = name
     }
+
+    override var description: String {
+        return name
+    }
     
     // MARK: - CacheTrackerPlainModel
-}
-
-extension PlainItem: ArrayCacheTrackerElement {
-
-    func evaluate(_ predicate: NSPredicate) -> Bool {
-        return true
-    }
-
-    static func sort(_ descriptors: [NSSortDescriptor], lhs: PlainItem, rhs: PlainItem) -> Bool {
-        return lhs.name < rhs.name
-    }
 }

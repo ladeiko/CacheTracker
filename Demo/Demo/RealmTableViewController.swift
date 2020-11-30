@@ -93,7 +93,7 @@ class RealmTableViewController: UITableViewController, CacheTrackerDelegate {
         
         cacheTracker = RealmCacheTracker<RealmItem, PlainItem>(realm: context)
         cacheTracker.delegate = self
-        let cacheRequest = CacheRequest(predicate: NSPredicate(value: true), sortDescriptors: [
+        let cacheRequest = CacheRequest.databaseRequest(predicate: NSPredicate(value: true), sortDescriptors: [
             NSSortDescriptor(key: #keyPath(CoreDataItem.name), ascending: true)
             ])
         

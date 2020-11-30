@@ -25,13 +25,13 @@ class MultiCachtrackerExample: CacheTrackerDelegateProxyDelegate {
         
         tracker1 = CoreDataCacheTracker<CoreDataItem, PlainItem>(context: NSManagedObjectContext.mr_default())
         tracker1.delegate = proxy1
-        tracker1.fetchWithRequest(CacheRequest(predicate: NSPredicate(value: true), sortDescriptors: [
+        tracker1.fetchWithRequest(CacheRequest.databaseRequest(predicate: NSPredicate(value: true), sortDescriptors: [
             NSSortDescriptor(key: #keyPath(CoreDataItem.name), ascending: true)
             ], fetchLimit: 5))
         
         tracker2 = CoreDataCacheTracker<CoreDataItem, PlainItem>(context: NSManagedObjectContext.mr_default())
         tracker2.delegate = proxy2
-        tracker2.fetchWithRequest(CacheRequest(predicate: NSPredicate(value: true), sortDescriptors: [
+        tracker2.fetchWithRequest(CacheRequest.databaseRequest(predicate: NSPredicate(value: true), sortDescriptors: [
             NSSortDescriptor(key: #keyPath(CoreDataItem.name), ascending: true)
             ], fetchLimit: 5))
     }
