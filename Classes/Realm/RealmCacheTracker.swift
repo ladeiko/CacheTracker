@@ -164,13 +164,15 @@ open class RealmCacheTracker<D: Object & CacheTrackerDatabaseModel, P: CacheTrac
         case .update: return .update
         case .delete: return .delete
         case .move: return .move
+            @unknown default:
+                fatalError()
         }
     }
     
     fileprivate func _fetchRequestWithCacheRequest(_ cacheRequest: CacheRequest) -> CacheTrackerRealmFetchRequest<D> {
         let fetchRequest = CacheTrackerRealmFetchRequest<D>(realm: _realm, predicate: cacheRequest.predicate)
-        fetchRequest.sortDescriptors = cacheRequest.sortDescriptors.map({ (sd) -> SortDescriptor in
-            return SortDescriptor(keyPath: sd.key!, ascending: sd.ascending)
+        fetchRequest.sortDescriptors = cacheRequest.sortDescriptors.map({ (sd) -> RealmSwift.SortDescriptor in
+            return RealmSwift.SortDescriptor(keyPath: sd.key!, ascending: sd.ascending)
         })
         return fetchRequest
     }

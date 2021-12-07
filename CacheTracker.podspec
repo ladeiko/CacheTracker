@@ -17,19 +17,22 @@ Pod::Spec.new do |s|
     end
 
     s.subspec 'CoreData' do |s|
-        s.source_files = [ 'Classes/Core/**/*.{swift}', 'Classes/CoreData/**/*.{swift}' ]
+        s.source_files = [ 'Classes/CoreData/**/*.{swift}' ]
         s.frameworks = 'CoreData'
+        s.dependency 'CacheTracker/Core'
         s.dependency 'HeckelDiff'
     end
 
     s.subspec 'Realm' do |s|
-        s.source_files = [ 'Classes/Core/**/*.{swift}', 'Classes/Realm/**/*.{swift}' ]
+        s.source_files = [ 'Classes/Realm/**/*.{swift}' ]
         s.dependency 'RBQFetchedResultsControllerX'
+        s.dependency 'CacheTracker/Core'
         s.dependency 'SafeRealmObjectX'
     end
 
     s.subspec 'Array' do |s|
-        s.source_files = [ 'Classes/Core/**/*.{swift}', 'Classes/Array/**/*.{swift}' ]
+        s.dependency 'CacheTracker/Core'
+        s.source_files = [ 'Classes/Array/**/*.{swift}' ]
     end
 
 end
