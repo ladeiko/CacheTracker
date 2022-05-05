@@ -38,9 +38,14 @@ open class CoreDataCacheTracker<D: CacheTrackerDatabaseModel, P: CacheTrackerPla
                                                  cacheName: cacheName)
         
         _controller.delegate = self
-        
-        try! _controller.performFetch()
-        delegate?.cacheTrackerShouldMakeInitialReload()
+
+        do {
+            try _controller.performFetch()
+            delegate?.cacheTrackerShouldMakeInitialReload()
+        }
+        catch {
+            print(error)
+        }
     }
     
     open func stopFetching() {
@@ -188,8 +193,13 @@ open class CoreDataCacheTracker<D: CacheTrackerDatabaseModel, P: CacheTrackerPla
             
             // HACK, try create more elegant solution in future
             if _cacheRequest.fetchLimit > 0, let fetchedObjects = _controller.fetchedObjects, fetchedObjects.count > (_cacheRequest.fetchLimit + fetchLimitThreshold) {
-                
-                try! _controller.performFetch()
+
+                do {
+                    try _controller.performFetch()
+                }
+                catch {
+                    print(error)
+                }
                 
                 if enableFetchLimitOverflowSoftNormalizer {
                     
