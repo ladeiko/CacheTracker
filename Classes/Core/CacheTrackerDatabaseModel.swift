@@ -9,7 +9,7 @@
 
 import Foundation
 
-public protocol CacheTrackerDatabaseModel: class, NSObjectProtocol {
+public protocol CacheTrackerDatabaseModel: AnyObject, NSObjectProtocol {
     
     static func entityName() -> String
     func toPlainModel<P>() -> P?

@@ -9,4 +9,4 @@
 
 import Foundation
 
-public protocol CacheTrackerPlainModel: class {}
+public protocol CacheTrackerPlainModel: AnyObject {}

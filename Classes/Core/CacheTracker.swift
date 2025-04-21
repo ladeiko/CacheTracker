@@ -7,7 +7,7 @@
 //  Based on https://github.com/akantsevoi/CacheTracker
 //
 
-public protocol CacheTracker: class {
+public protocol CacheTracker: AnyObject {
     
     associatedtype P: CacheTrackerPlainModel
     

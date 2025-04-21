@@ -63,7 +63,7 @@ class RealmFetchResultsSectionInfo<T: Object> {
 /**
 Delegate to pass along the changes identified by the FetchedResultsController.
 */
-protocol RealmFetchedResultsControllerDelegate: class {
+protocol RealmFetchedResultsControllerDelegate: AnyObject {
     
     /**
     Indicates that the controller has started identifying changes.
@@ -439,7 +439,7 @@ extension RealmFetchedResultsController: DelegateProxyProtocol {
 }
 
 // Internal Proxy To Manage Converting The Objc Delegate
-internal protocol DelegateProxyProtocol: class {
+internal protocol DelegateProxyProtocol: AnyObject {
     func controllerWillChangeContent(_ controller: RBQFetchedResultsController!)
     
     func controller(_ controller: RBQFetchedResultsController!, didChangeObject anObject: RBQSafeRealmObject!, atIndexPath indexPath: IndexPath!, forChangeType type: NSFetchedResultsChangeType, newIndexPath: IndexPath!)

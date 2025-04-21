@@ -9,7 +9,7 @@
 
 import Foundation
 
-public protocol CacheTrackerDelegate: class {
+public protocol CacheTrackerDelegate: AnyObject {
     func cacheTrackerShouldMakeInitialReload()
     func cacheTrackerBeginUpdates()
     func cacheTrackerDidGenerate<P>(transactions: [CacheTransaction<P>])
@@ -21,7 +21,7 @@ public protocol CacheTrackerDelegate: class {
  *  in this case you can create two CacheTrackerDelegateProxy objects make them
  *  delegates for corresponding trackers and in their delegates identify them by pointers
  */
-public protocol CacheTrackerDelegateProxyDelegate: class {
+public protocol CacheTrackerDelegateProxyDelegate: AnyObject {
     func cacheTrackerShouldMakeInitialReload(_ proxy: CacheTrackerDelegateProxy)
     func cacheTrackerBeginUpdates(_ proxy: CacheTrackerDelegateProxy)
     func cacheTrackerDidGenerate<P>(_ proxy: CacheTrackerDelegateProxy, transactions: [CacheTransaction<P>])
